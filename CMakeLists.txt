@@ -36,6 +36,7 @@ enable_testing()
 
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} \
     -O3 -s -ffast-math -march=native\
+    -DHALF_ENABLE_F16C_INTRINSICS=1 \
     -DXTENSOR_USE_XSIMD=1 \
     -DXTENSOR_DISABLE_EXCEPTIONS=1 \
     -DNDEBUG")

@@ -1,5 +1,26 @@
-#define XTENSOR_USE_XSIMD
 #include <iostream>
+
+#include "half/half.hpp"
+using half_float::half;
+
+namespace xtl{
+
+inline half select(const bool& cond, const half& v1, const half& v2) noexcept {
+	return cond ? v1 : v2;
+}
+
+template<class T>
+inline std::common_type_t<T, half> select(const bool& cond, const T& v1, const half& v2) noexcept {
+	return cond ? v1 : v2;
+}
+
+template<class T>
+inline std::common_type_t<half, T> select(const bool& cond, const half& v1, const T& v2) noexcept {
+	return cond ? v1 : v2;
+}
+
+}
+
 #include <xtensor/xarray.hpp>
 #include <xtensor/xpad.hpp>
 #include <xtensor/xslice.hpp>
@@ -7,7 +28,6 @@
 #include <xtensor/xio.hpp>
 #include <vector>
 #include <chrono>
-#include "half/half.hpp"
 
 int main() {
     using half_float::half;
